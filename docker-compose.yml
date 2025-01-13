@@ -1,0 +1,40 @@
+version: '3'
+services:
+  backend:
+    container_name: CarsHub_backend_container
+    build: ./backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+    environment:
+      - MONGODB_URI=mongodb://database:27017/CarsHub
+    volumes:
+      - ./backend:/app   # Monta el código fuente local en el contenedor
+      - /app/node_modules  # Excluye `node_modules` del volumen local
+
+  database:
+    container_name: CarsHub_mongodb_container
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./database/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro # Importar datos al iniciar el contenedor
+    environment:
+      MONGO_INITDB_DATABASE: CarsHub
+
+  frontend:
+    container_name: CarsHub_frontend_container
+    build: ./frontend
+    ports:
+      - "8080:8080"
+    #command: npm run dev -- --port 8080 --host 0.0.0.0 # No es necesario, esta en el script de package.json
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules  # Excluye `node_modules` del volumen local para que Docker lo use del contenedor
+    depends_on:
+      - backend
+
+volumes:
+  mongodb_data:

@@ -1,0 +1,23 @@
+{
+  "name": "proyecto-e12",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SyTW2425/Proyecto-E12.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SyTW2425/Proyecto-E12/issues"
+  },
+  "homepage": "https://github.com/SyTW2425/Proyecto-E12#readme",
+  "dependencies": {
+    "primeicons": "^7.0.0"
+  }
+}
